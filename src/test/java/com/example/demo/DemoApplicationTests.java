@@ -19,6 +19,7 @@ class DemoApplicationTests {
 		int desValue = calculator.addValue(10, 5);
 		assertThat(expectedValue).isEqualTo(desValue);
 
-		System.out.println("this value are equeal");
+
+		//System.out.println("this value are equeal");
 	}
 }
