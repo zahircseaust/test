@@ -18,3 +18,28 @@ import static org.junit.jupiter.api.Assertions.*;
     }
     }
 
+ @PostMapping()
+ ResponseWithPagination<List<PolicyModel>> getAllPolicy(@RequestBody @Valid PolicyListingRequestModel policyListingRequestModel) {
+
+        try {
+
+            ListingModel<List<PolicyModel>> policies = policyService.getAllPolicy(policyListingRequestModel);
+            Pagination pagination = new Pagination(policyListingRequestModel.getPageNo(), NumberUtils.parseInt(policies.getCount())/policyListingRequestModel.getPerPage(), policyListingRequestModel.getPerPage());
+
+            return new ResponseWithPagination.Builder<List<PolicyModel>>()
+                    .setData(policies.getData())
+                    .setPagination(pagination)
+                    .build();
+
+        } catch (Exception e) {
+
+            return new ResponseWithPagination.Builder<List<PolicyModel>>()
+                    .setMessage("No Policy Found !!")
+                    .setData(new ArrayList<>())
+                    .setStatus(false)
+                    .build();
+
+        }
+
+    }
+
