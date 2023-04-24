@@ -43,3 +43,39 @@ import static org.junit.jupiter.api.Assertions.*;
 
     }
 
+
+ @Test
+    void getAllPolicy(){
+                ArrayList<String> dates = new ArrayList<>();
+                dates.add("2014-03");
+                PolicyListingRequestModel policyListingRequestModel = new PolicyListingRequestModel(
+                "",
+                "",
+                new ArrayList<String>(dates),
+                "",
+                1,
+                10,
+                1
+        );
+//        ResponseWithPagination<List<PolicyModel>> policyList = new ResponseWithPagination<>();
+                PolicyModel policyModel = new PolicyModel(
+                "2296407",
+                "BEGUM, JAMILA",
+                "",
+                42,
+                6182.00,
+                DateUtils.parse("28-Mar-2014", DateUtils.FORMAT_DD_MMM_YYYY)
+        );
+        ListingModel<List<PolicyModel>> policies = new ListingModel<>();
+        policies.getData().add(policyModel);
+
+
+
+        when(policyService.getAllPolicy(any())).thenReturn(policies);
+
+        ResponseWithPagination<List<PolicyModel>> actualResponse = policyController.getAllPolicy(policyListingRequestModel);
+        assert actualResponse != null;
+
+        Assertions.assertEquals(policies.getData().stream().map(p->p.getPolicyNumber()).collect(Collectors.toList()), actualResponse.getData().stream().map(p -> p.getPolicyNumber()).collect(Collectors.toList()));
+   }
+
