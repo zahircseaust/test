@@ -20,6 +20,7 @@ class DemoApplicationTests {
 		assertThat(expectedValue).isEqualTo(desValue);
 
 
-		System.out.println("this value are equeal");
+		//System.out.println("this value are equeal");
+
 	}
 }
