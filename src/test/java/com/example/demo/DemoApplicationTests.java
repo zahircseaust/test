@@ -18,7 +18,8 @@ class DemoApplicationTests {
 		Calculator calculator = new Calculator();
 		int desValue = calculator.addValue(10, 5);
 		assertThat(expectedValue).isEqualTo(desValue);
-
+		//global exception handler link
+                //https://www.geeksforgeeks.org/spring-boot-exception-handling/
 
 		//System.out.println("this value are equeal");
 
