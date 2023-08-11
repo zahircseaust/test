@@ -22,6 +22,16 @@ class DemoApplicationTests {
                 //https://www.geeksforgeeks.org/spring-boot-exception-handling/
 
 		//System.out.println("this value are equeal");
+		    @Override
+    public ApiResponse getBloodSugarListDaily(String userId, LocalDate date) {
+        LocalDateTime dayStart = dateUtilityService.getDayStart(date);
+        LocalDateTime dayEnd = dateUtilityService.getDayEnd(date);
+
+        List<BloodSugarListDailyDto> bloodSugarListDailyDtos = bloodSugarRepository.getBloodSugarDaily(dayStart, dayEnd, userId, false).stream().map(bloodSugar -> mapper.map(bloodSugar, BloodSugarListDailyDto.class)).collect(Collectors.toList());
+        ApiResponse apiResponse = new ApiResponse(true, DiabeticServiceConstant.BLOOD_SUGAR_LEVEL_DAILY_SUCCESS_MSG,
+                bloodSugarListDailyDtos, null);
+        return apiResponse;
+    }
 
 	}
 }
