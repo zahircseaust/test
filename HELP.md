@@ -16,5 +16,15 @@ For further reference, please consider the following sections:
   PRIMARY KEY (`pid`),
   KEY `FKm2yengq9w1m07kk7qndvhxhyd` (`cp_fk`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1
+  ========
+  CREATE TABLE product (
+  pid int NOT NULL,
+  price int NOT NULL,
+  product_name varchar(255) NULL,
+  qty int NOT NULL,
+  cp_fk int NULL,
+  CONSTRAINT PK_product PRIMARY KEY (pid),
+  CONSTRAINT FK_product_cp FOREIGN KEY (cp_fk) REFERENCES other_table(cp_column)
+);
 
 
